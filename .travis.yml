@@ -16,3 +16,5 @@ deploy:
   file: "/home/travis/build/wazim/pitstop/target/pitstop-$TRAVIS_BUILD_NUMBER.jar"
   on:
     repo: wazim/pitstop
+    tags: true
+    all_branches: true
