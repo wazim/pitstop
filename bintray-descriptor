@@ -16,7 +16,7 @@
 
     "files":
         [
-        {"includePattern": "build/wazim/pitstop/target/(.*\.jar)", "uploadPattern": "$1"},
+        {"includePattern": "build/wazim/pitstop/target/(.*\.jar)", "uploadPattern": "$1"}
         ],
     "publish": true
 }
