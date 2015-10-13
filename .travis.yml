@@ -5,6 +5,6 @@ jdk:
 - oraclejdk8
 deploy:
   provider: bintray
-  file: "/home/travis/.m2/repository/net/wazim/pitstop/DEV-SNAPSHOT/pitstop-DEV-SNAPSHOT.jar"
+  file: "bintray-descriptor"
   user: "wazim"
   key: "ZTcAOJwNPaCII/pDJElV41jfvwkubL3FrFxvMe+pMKTm10ZQXL727ub2hSfa4KBsvhMBu5RXcoLJN8sgll6Ps1Dh/HRMIe4ZB2pEntHVyElFsdgtNnVP7IYXeJcv6spLje9wCngpv7JG6ABfTgW+5EevPhunIk2dHcKOEvH/XYgd5jwbfFViCT7ZiXCliQxJt66DrloUmJ7enbk9oiGCppLmAw6ebVENi0JxHEH7N9bQ0T+Vl+VGkADTkBpQAy67HhYHww4g0FZvTzGm1Kdo198iX0fwAqtXiRqQo+zQj+oYzbd9IdCEbJOhkQ93yT6kriMxNj3Tx/uwSyZig2g3ehBbRlwtlKh8vL/e6+tOgoGVYoT6reUaiPLpizrjWzfdtMceLF8X3zTAgh+78OrW5tiIy0mJBiTzifZbfLiLO8V1jpYFtiGuGBQihwzY1YES+LjEUud7KN80//IBRdcoBl2UJT/eteovVQSlbBUXZoOSE8gqljrgyA61LY06nJ0q8SjRJUevPeK+S7o9NrWrnLCMlrCIpK6ZSt4kzV+Og3NW/zCxSZl8W+zhdoql3ZhvsLpP5LdMPRfy3E3/xy5GosuIJONfPofm5NGDxzemfwy4dc8Ax/d9aqdQlC+CKasvhrcQnEVZr24raNZbu7NWyBvYXi6YjUHhcO4i7DEIDEQ="
