@@ -5,25 +5,21 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @SuppressWarnings("unused")
 public class DriverController {
 
-    private List<Driver> allDrivers = new ArrayList<>();
+    private Map<String, Driver> allDrivers = new HashMap<>();
 
     @RequestMapping(value = "drivers", method = RequestMethod.POST)
     public ResponseEntity<String> addDrivers(@RequestBody List<LinkedHashMap<String, String>> drivers) {
+        allDrivers.clear();
         for (LinkedHashMap<String, String> driver : drivers) {
-            allDrivers.add(
+            allDrivers.put(driver.get("familyName").toLowerCase(),
                     new Driver(
                             driver.get("driverId"),
                             Integer.parseInt(driver.get("permanentNumber")),
@@ -38,21 +34,33 @@ public class DriverController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "drivers", method = RequestMethod.GET)
+    @RequestMapping(value = "f1/**/drivers/{familyName}.json")
+    public ResponseEntity<String> getDriver(@PathVariable String familyName) {
+        Driver driver = allDrivers.get(familyName.toLowerCase());
+        JSONObject jsonResponse = createJsonResponse(Collections.singletonList(driver));
+        return new ResponseEntity<>(jsonResponse.toString(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "f1/**/drivers.json", method = RequestMethod.GET)
     public ResponseEntity<String> getDrivers() {
+        JSONObject jsonResponse = createJsonResponse(allDrivers.values());
+        return new ResponseEntity<>(jsonResponse.toString(), HttpStatus.OK);
+    }
+
+    private JSONObject createJsonResponse(Collection<Driver> driver) {
         JSONObject rootObject = new JSONObject();
 
         JSONArray drivers = new JSONArray();
-        for (Driver driver : allDrivers) {
+        for (Driver theDriver : driver) {
             JSONObject driverJson = new JSONObject();
-            driverJson.put("driverId", driver.driverId());
-            driverJson.put("permanentNumber", driver.permanentNumber());
-            driverJson.put("code", driver.code());
-            driverJson.put("url", driver.url());
-            driverJson.put("givenName", driver.givenName());
-            driverJson.put("familyName", driver.familyName());
+            driverJson.put("driverId", theDriver.driverId());
+            driverJson.put("permanentNumber", theDriver.permanentNumber());
+            driverJson.put("code", theDriver.code());
+            driverJson.put("url", theDriver.url());
+            driverJson.put("givenName", theDriver.givenName());
+            driverJson.put("familyName", theDriver.familyName());
             driverJson.put("dateOfBirth", "1990-12-10");
-            driverJson.put("nationality", driver.nationality());
+            driverJson.put("nationality", theDriver.nationality());
             drivers.put(driverJson);
         }
 
@@ -69,8 +77,7 @@ public class DriverController {
         data.put("total", allDrivers.size());
         data.put("DriverTable", driverTable);
         rootObject.put("MRData", data);
-
-        return new ResponseEntity<>(rootObject.toString(), HttpStatus.OK);
+        return rootObject;
     }
 
 }

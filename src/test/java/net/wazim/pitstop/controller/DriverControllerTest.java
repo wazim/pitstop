@@ -2,8 +2,8 @@ package net.wazim.pitstop.controller;
 
 import net.wazim.pitstop.PitStop;
 import net.wazim.pitstop.domain.Driver;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
@@ -15,16 +15,16 @@ import static org.junit.Assert.assertThat;
 
 public class DriverControllerTest {
 
-    private PitStop pitStop;
+    private static PitStop pitStop;
 
-    @Before
-    public void startPitstop() {
+    @BeforeClass
+    public static void startPitstop() {
         pitStop = new PitStop();
         pitStop.start();
     }
 
-    @After
-    public void stopPitstop() {
+    @AfterClass
+    public static void stopPitstop() {
         pitStop.stop();
     }
 
@@ -41,7 +41,7 @@ public class DriverControllerTest {
         )));
 
         TestRestTemplate client = new TestRestTemplate();
-        ResponseEntity<String> driversResponse = client.getForEntity("http://localhost:8080/drivers", String.class);
+        ResponseEntity<String> driversResponse = client.getForEntity("http://localhost:8080/f1/2015/drivers.json", String.class);
 
         assertThat(driversResponse.getBody(), containsString("PEDR"));
         assertThat(driversResponse.getBody(), containsString("0"));
@@ -50,5 +50,29 @@ public class DriverControllerTest {
         assertThat(driversResponse.getBody(), containsString("Pedr"));
         assertThat(driversResponse.getBody(), containsString("Oh"));
         assertThat(driversResponse.getBody(), containsString("English"));
+    }
+
+    @Test
+    public void getADriverByFamilyName() {
+        pitStop.primeDrivers(Collections.singletonList(new Driver(
+                "TEST",
+                14,
+                "TEST",
+                "http://test.com",
+                "Test",
+                "Match",
+                "French"
+        )));
+
+        TestRestTemplate client = new TestRestTemplate();
+        ResponseEntity<String> driversResponse = client.getForEntity("http://localhost:8080/f1/2015/drivers/match.json", String.class);
+
+        assertThat(driversResponse.getBody(), containsString("TEST"));
+        assertThat(driversResponse.getBody(), containsString("14"));
+        assertThat(driversResponse.getBody(), containsString("TEST"));
+        assertThat(driversResponse.getBody(), containsString("http://test.com"));
+        assertThat(driversResponse.getBody(), containsString("Test"));
+        assertThat(driversResponse.getBody(), containsString("Match"));
+        assertThat(driversResponse.getBody(), containsString("French"));
     }
 }
