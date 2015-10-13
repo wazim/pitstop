@@ -7,9 +7,12 @@ before_deploy:
 - mvn versions:set -DnewVersion=$TRAVIS_BUILD_NUMBER
 - mvn versions:commit
 - mvn install -DskipTests=true
+- git reset --hard
 - git fetch --tags
 deploy:
   provider: releases
   api_key:
     secure: WveDKYROGdimcpOYZISAbY2m4yKDkUC6WW0rSOWMiTPBd0I67t46XdoZkfGjBULO1XSKiOyG5r8W/F2rWP6H5UsZ+TYMgMz/fBthB+B/AlqEXMrIHVWANkm++fMvUuL5EJYp/sckeEfRTLeS4xsDRuvS7VPH6g27f1L+JcoWQsHgeqM4H1u/6uEp4x6EooQLb8ZOnpN6iowUgFSqoEeGFyTsf3VNG4xVHeF8XD11RPsSXLasuspK/149NlbmY0X/z/Ess87yPPJRTSsZKtyXpsBUu7WFTvB6O5hG028txTZPHdQZ8ZFODjc/bnuyG/EHPRmpM9Zf3Dmu15treyAJlRLp7GYRKxNECTTLxdkmRKLa+IVJFDK2R5nJgL56NEklj0Dum8w6kQ/m5wfWurupWgZM10CyIdSo/i61zYku+YGRSzG2k+2v0Q3l6Wdw3OLz6CcpQZZHVykjuFJo+hk6OaChzTX9yISHSUOVsslz3jvNG9bsxbyoXKT9ZtTVs+D/A1FO6TU1DavW81Pz86C2ynmQnUAUxg1k7ob1P89LtirNYLx+cigw9BwNpFRLqQ5OQrI+Ae20Mh6K3TqgBRP7HsaCiED2Z5Po7yIepA2yviAnntmMtZnwK1rQ0A3Gfhfvo4Ly7PNzLT0TW/zfrxV2W6boXWcq0DKKr5Ny4VXfxi8=
   file: "/home/travis/build/wazim/pitstop/target/pitstop-$TRAVIS_BUILD_NUMBER.jar"
+  on:
+    repo: wazim/pitstop
