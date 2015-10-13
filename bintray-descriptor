@@ -4,8 +4,8 @@
        fields are mandatory. */
 
     "package": {
-        "name": "pitstop",
-        "repo": "releases",
+        "name": "releases",
+        "repo": "maven",
         "subject": "wazim"
     },
 
