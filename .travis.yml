@@ -6,6 +6,7 @@ jdk:
 before_deploy:
     - "mvn versions:set -DnewVersion=$TRAVIS_BUILD_NUMBER"
     - "mvn versions:commit"
+    - "mvn install -DskipTests=true"
 deploy:
   provider: bintray
   file: bintray-descriptor
