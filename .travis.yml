@@ -3,6 +3,9 @@ notifications:
   email: false
 jdk:
 - oraclejdk8
+before_deploy:
+    - "mvn versions:set -DnewVersion=$TRAVIS_BUILD_NUMBER"
+    - "mvn versions:commit"
 deploy:
   provider: bintray
   file: bintray-descriptor
