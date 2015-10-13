@@ -6,7 +6,7 @@
     "package": {
         "name": "pitstop",
         "repo": "releases",
-        "subject": "Pitstop Release"
+        "subject": "wazim"
     },
 
 
@@ -16,7 +16,8 @@
 
     "files":
         [
-        {"includePattern": "build/wazim/pitstop/target/(.*\.jar)", "uploadPattern": "$1"}
+        {"includePattern": "/home/travis/build/wazim/pitstop/target/(.*\.jar)", "uploadPattern": "$1"}
+        {"includePattern": "/home/travis/.m2/repository/net/wazim/pitstop/(.*)/(.*\.jar)", "uploadPattern": "$2"}
         ],
     "publish": true
 }
