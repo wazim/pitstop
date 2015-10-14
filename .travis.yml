@@ -7,4 +7,5 @@ after_success:
 - mvn versions:set -DnewVersion=$TRAVIS_BUILD_NUMBER
 - mvn versions:commit
 - mvn install -DskipTests=true
-- curl -T /home/travis/build/wazim/pitstop/target/pitstop-$TRAVIS_BUILD_NUMBER.jar -u wazim:82e99f945b4c42e98df201fa774ea6b935f9c138 https://api.bintray.com/maven/wazim/maven/pitstop/net/wazim/pitstop/$TRAVIS_BUILD_NUMBER/pitstop-$TRAVIS_BUILD_NUMBER.jar;publish=1 -v
+- curl -T /home/travis/build/wazim/pitstop/target/pitstop-$TRAVIS_BUILD_NUMBER.jar -u wazim:82e99f945b4c42e98df201fa774ea6b935f9c138 https://api.bintray.com/maven/wazim/maven/pitstop/net/wazim/pitstop/$TRAVIS_BUILD_NUMBER/pitstop-$TRAVIS_BUILD_NUMBER.jar -v
+- curl -X POST -u wazim:82e99f945b4c42e98df201fa774ea6b935f9c138 https://api.bintray.com/maven/wazim/maven/pitstop/net/wazim/pitstop/$TRAVIS_BUILD_NUMBER/publish -v
