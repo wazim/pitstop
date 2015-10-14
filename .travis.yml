@@ -8,4 +8,4 @@ after_success:
 - mvn versions:commit
 - mvn install -DskipTests=true
 - curl -v -T /home/travis/build/wazim/pitstop/target/pitstop-$TRAVIS_BUILD_NUMBER.jar -u $BINTRAY_USER:$BINTRAY_PASSWORD https://api.bintray.com/maven/wazim/maven/pitstop/net/wazim/pitstop/$TRAVIS_BUILD_NUMBER/pitstop-$TRAVIS_BUILD_NUMBER.jar;publish=1
-- curl -X POST -u $BINTRAY_USER:$BINTRAY_PASSWORD https://api.bintray.com/maven/wazim/maven/pitstop/net/wazim/pitstop/$TRAVIS_BUILD_NUMBER/publish -v
+- curl -X PUT -u $BINTRAY_USER:$BINTRAY_PASSWORD https://api.bintray.com/content/wazim/maven/pitstop/net/wazim/pitstop/$TRAVIS_BUILD_NUMBER/publish -v
