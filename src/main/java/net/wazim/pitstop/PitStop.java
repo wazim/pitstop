@@ -1,6 +1,7 @@
 package net.wazim.pitstop;
 
 import net.wazim.pitstop.domain.Driver;
+import net.wazim.pitstop.domain.Race;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.client.RestTemplate;
@@ -14,15 +15,20 @@ public class PitStop {
 
     public void start() {
         applicationContext = new SpringApplicationBuilder(PitStopConfig.class)
-                .showBanner(true)
+                .showBanner(false)
                 .run();
     }
 
     public void stop() {
         applicationContext.stop();
+        applicationContext.close();
     }
 
     public void primeDrivers(List<Driver> drivers) {
         client.postForEntity("http://localhost:8080/drivers", drivers, String.class);
+    }
+
+    public void primeRaces(List<Race> races) {
+        client.postForEntity("http://localhost:8080/races", races, String.class);
     }
 }

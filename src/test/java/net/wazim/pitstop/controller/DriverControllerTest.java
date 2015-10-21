@@ -2,8 +2,8 @@ package net.wazim.pitstop.controller;
 
 import net.wazim.pitstop.PitStop;
 import net.wazim.pitstop.domain.Driver;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +17,14 @@ public class DriverControllerTest {
 
     private static PitStop pitStop;
 
-    @BeforeClass
-    public static void startPitstop() {
+    @Before
+    public void startPitstop() {
         pitStop = new PitStop();
         pitStop.start();
     }
 
-    @AfterClass
-    public static void stopPitstop() {
+    @After
+    public void stopPitstop() {
         pitStop.stop();
     }
 
