@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @RestController
@@ -39,9 +42,9 @@ public class RaceScheduleController {
                                             (String) location.get("locality"),
                                             (String) location.get("country")
                                     )
-                            )
-                    )
-            );
+                            ),
+                            getDateFrom(race)
+                    ));
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -79,7 +82,11 @@ public class RaceScheduleController {
             raceJson.put("season", race.season());
             raceJson.put("round", race.round());
             raceJson.put("url", race.url());
+            raceJson.put("raceName", race.raceName());
             raceJson.put("Circuit", circuitJson);
+
+            raceJson.put("date", race.dateTime().toLocalDate());
+            raceJson.put("time", race.dateTime().toLocalTime().atOffset(ZoneOffset.UTC).format(DateTimeFormatter.ISO_OFFSET_TIME));
             racesJson.put(raceJson);
         }
 
@@ -97,5 +104,17 @@ public class RaceScheduleController {
         data.put("RaceTable", raceTable);
         rootObject.put("MRData", data);
         return rootObject;
+    }
+
+    private static LocalDateTime getDateFrom(LinkedHashMap<String, Object> race) {
+        Map<String, Integer> dateTime = (Map<String, Integer>) race.get("dateTime");
+        return LocalDateTime.of(
+                dateTime.get("year"),
+                dateTime.get("monthValue"),
+                dateTime.get("dayOfMonth"),
+                dateTime.get("hour"),
+                dateTime.get("minute"),
+                dateTime.get("second")
+        );
     }
 }

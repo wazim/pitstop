@@ -2,6 +2,8 @@ package net.wazim.pitstop.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.LocalDateTime;
+
 public class Race {
 
     @JsonProperty
@@ -14,13 +16,16 @@ public class Race {
     private final String raceName;
     @JsonProperty
     private final Circuit circuit;
+    @JsonProperty
+    private final LocalDateTime dateTime;
 
-    public Race(int season, int round, String url, String raceName, Circuit circuit) {
+    public Race(int season, int round, String url, String raceName, Circuit circuit, LocalDateTime dateTime) {
         this.season = season;
         this.round = round;
         this.url = url;
         this.raceName = raceName;
         this.circuit = circuit;
+        this.dateTime = dateTime;
     }
 
     public int season() {
@@ -41,5 +46,9 @@ public class Race {
 
     public Circuit circuit() {
         return circuit;
+    }
+
+    public LocalDateTime dateTime() {
+        return dateTime;
     }
 }

@@ -10,6 +10,9 @@ import org.junit.Test;
 import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Collections;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -47,7 +50,8 @@ public class RaceScheduleControllerTest {
                                 "Melbourne",
                                 "Australia"
                         )
-                )
+                ),
+                LocalDateTime.of(LocalDate.of(2015, 10, 10), LocalTime.of(12, 12, 12))
         )));
 
         TestRestTemplate client = new TestRestTemplate();
@@ -82,7 +86,8 @@ public class RaceScheduleControllerTest {
                                 "Melbourne",
                                 "British"
                         )
-                )
+                ),
+                LocalDateTime.of(LocalDate.of(2015, 12, 25), LocalTime.of(12, 00, 00))
         )));
 
         TestRestTemplate client = new TestRestTemplate();
@@ -98,6 +103,8 @@ public class RaceScheduleControllerTest {
         assertThat(racesResponse.getBody(), containsString("144.968"));
         assertThat(racesResponse.getBody(), containsString("Melbourne"));
         assertThat(racesResponse.getBody(), containsString("British"));
+        assertThat(racesResponse.getBody(), containsString("2015-12-25"));
+        assertThat(racesResponse.getBody(), containsString("12:00:00Z"));
     }
 
 }
