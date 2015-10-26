@@ -2,6 +2,7 @@ package net.wazim.pitstop;
 
 import net.wazim.pitstop.domain.Driver;
 import net.wazim.pitstop.domain.Race;
+import net.wazim.pitstop.domain.RaceResult;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.client.RestTemplate;
@@ -30,5 +31,9 @@ public class PitStop {
 
     public void primeRaces(List<Race> races) {
         client.postForEntity("http://localhost:8080/races", races, String.class);
+    }
+
+    public void primeRaceResults(List<RaceResult> raceResults) {
+        client.postForEntity("http://localhost:8080/raceResults", raceResults, String.class);
     }
 }
