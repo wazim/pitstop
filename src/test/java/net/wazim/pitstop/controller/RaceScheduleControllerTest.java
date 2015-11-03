@@ -35,7 +35,7 @@ public class RaceScheduleControllerTest {
 
     @Test
     public void primeRaceScheduleAndRetrieveIt() {
-        pitStop.primeRaces(Collections.singletonList(new Race(
+        pitStop.primeRace(new Race(
                 2015,
                 1,
                 "http://wikipedia.org",
@@ -52,7 +52,7 @@ public class RaceScheduleControllerTest {
                         )
                 ),
                 LocalDateTime.of(LocalDate.of(2015, 10, 10), LocalTime.of(12, 12, 12))
-        )));
+        ));
 
         TestRestTemplate client = new TestRestTemplate();
         ResponseEntity<String> racesResponse = client.getForEntity("http://localhost:8080/f1/current.json", String.class);

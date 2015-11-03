@@ -20,6 +20,10 @@ public class Driver implements Serializable {
     @JsonProperty
     private final String nationality;
 
+    public static final Driver LEWIS_HAMILTON = new Driver("hamilton", 44, "HAM", "http://en.wikipedia.org/wiki/Lewis_Hamilton", "Lewis", "Hamilton", "British");
+    public static final Driver NICO_ROSBERG = new Driver("rosberg", 6, "ROS", "http://en.wikipedia.org/wiki/Nico_Rosberg", "Nico", "Rosberg", "German");
+    public static final Driver FERNANDO_ALONSO = new Driver("alonso", 14, "ALO", "http://en.wikipedia.org/wiki/Fernando_Alonso", "Fernando", "Alonso", "Spanish");
+
     public Driver(String driverId, int permanentNumber, String code, String url, String givenName, String familyName, String nationality) {
         this.driverId = driverId;
         this.permanentNumber = permanentNumber;

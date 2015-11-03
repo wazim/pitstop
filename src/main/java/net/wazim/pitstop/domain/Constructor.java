@@ -12,6 +12,8 @@ public class Constructor {
     @JsonProperty
     private final String nationality;
 
+    public static final Constructor MERCEDES = new Constructor("mercedes", "http://wikipedia.org/Mercedes", "Mercedes", "German");
+
     public Constructor(String constructorId, String url, String name, String nationality) {
         this.constructorId = constructorId;
         this.url = url;
